@@ -1,0 +1,83 @@
+<div class="bg">
+  <div class="heading">
+    <img id="pen-icon" src="./assets/img/pen-logo.png" alt="pen-icon">
+    <h1 id="title">Key2Pen</h1>
+    <h2 id="tagLine">"You Type We Write"</h2>
+    <a href="#preview"><button class="btn btn-primary" id="getStarted" >Get Started</button></a>
+  </div>
+</div>
+<div class="main">
+<div class="container">
+  <div class="row">
+    <div class="preview" id="preview" style="background-image: url({{selectedPaper}});">
+      <p 
+        id="content" 
+        [ngStyle]="{'font-family':selectedFont, 'font-size':selectedSize, 'width':optimizedContentWidth, 'line-height':selectedLineHight, 'margin-left':selectedHorizontalMargin, 'margin-top':selectedVerticalMargin}">
+        {{content}}</p>
+    </div>
+    <div class="col-md-7">
+      <div class="controlBox">
+        <form>
+          <span>
+            <Select 
+              (change)="onPaperChange($event.target.value)"
+              style="width:230px">
+              <option value="/assets/img/noMargin.jfif" aria-placeholder="Choose Paper Type">Paper Type (No Margin)</option>
+              <option  
+                *ngFor="let paper of papers | keyvalue" 
+                value="{{paper.value}}">
+                {{paper.key}}
+              </option>
+            </Select>
+            <Select 
+              (change)="onFontFamilyChange($event.target.value)"
+              style="width:230px">
+              <option value="">Font Family (Arial)</option>
+              <option  
+                *ngFor="let font of fonts" 
+                value="{{font}}">
+                {{font}}
+              </option>
+            </Select>
+            <input 
+              type="number" 
+              min="0" 
+              (change)="onFontSizeChange($event.target.value)" 
+              placeholder="Font Size (13)"
+              style="width:130px">
+          </span>
+          <input 
+            type="number" 
+            min="0"
+            (change)="onLineHightChange($event.target.value)" 
+            placeholder="Line Hight" 
+            style="width:130px">
+          <input 
+            type="number" 
+            min="0"
+            (change)="onHorizontalMarginChange($event.target.value)" 
+            placeholder="X:" 
+            style="width:130px">
+          <input 
+            type="number" 
+            min="0"
+            (change)="onVerticalMarginChange($event.target.value)" 
+            placeholder="Y:" 
+            style="width:130px">
+          <button class="btn btn-primary" (click)="openPDF()">Downlaod</button>
+        </form>
+      </div>
+      <hr>
+      <textarea name="" id="" cols="30" rows="10" [(ngModel)]="content" placeholder="Type here..."></textarea>
+
+      <!-- COPYRIGHTS -->
+      <br><br><br>
+      <div>
+        <p>Made wih :) by <a href="https://rajatsaxena.netlify.app">Rajat Saxena</a></p>
+        <p>Copyright &copy; All rights reserved {{ currentYear }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
